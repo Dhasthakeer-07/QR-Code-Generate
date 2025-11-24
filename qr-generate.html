@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>QR Code Generator</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                    },
+                }
+            }
+        }
+        </script>
+    </head>
+    <body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+        <!-- Header -->
+        <div class="bg-white shadow-sm border-b border-slate-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <svg
+                            class="w-6 h-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">QR Code Generator</h1>
+                        <p class="text-xs sm:text-sm text-slate-500">Create custom QR codes with center logos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                <!-- Form Section -->
+                <div class="p-6 sm:p-8 lg:p-10">
+                    <div class="space-y-6">
+                        <!-- URL Input -->
+                        <div class="group">
+                            <label for="url" class="block text-sm font-semibold text-slate-700 mb-2">
+                                <span class="flex items-center gap-2">
+                                    <svg
+                                        class="w-4 h-4 text-blue-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                                        ></path>
+                                    </svg>
+                                    Website URL
+                                </span>
+                            </label>
+                            <input
+                                id="url"
+                                type="text"
+                                placeholder="https://example.com"
+                                value="https://example.com"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-slate-700 placeholder-slate-400"
+                            >
+                        </div>
+                        <!-- Logo Upload -->
+                        <div class="group">
+                            <label for="logo" class="block text-sm font-semibold text-slate-700 mb-2">
+                                <span class="flex items-center gap-2">
+                                    <svg
+                                        class="w-4 h-4 text-indigo-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                        ></path>
+                                    </svg>
+                                    Center Logo (Optional)
+                                </span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    id="logo"
+                                    type="file"
+                                    accept="image/*"
+                                    class="block w-full text-sm text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer border-2 border-dashed border-slate-300 rounded-xl px-4 py-3 hover:border-blue-400 transition-all duration-200"
+                                >
+                            </div>
+                            <p class="mt-2 text-xs text-slate-500">PNG or JPEG with transparency works best</p>
+                        </div>
+                        <!-- QR Size -->
+                        <div class="group">
+                            <label for="size" class="block text-sm font-semibold text-slate-700 mb-2">
+                                <span class="flex items-center gap-2">
+                                    <svg
+                                        class="w-4 h-4 text-purple-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                                        ></path>
+                                    </svg>
+                                    QR Code Size (pixels)
+                                </span>
+                            </label>
+                            <input
+                                id="size"
+                                type="number"
+                                value="520"
+                                min="128"
+                                max="2000"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all duration-200 text-slate-700"
+                            >
+                            <p class="mt-2 text-xs text-slate-500">Range: 128 - 2000 pixels</p>
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                            <button id="generateBtn" class="flex-1 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2">
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                                    ></path>
+                                </svg>
+                                Generate QR Code
+                            </button>
+                            <button id="downloadBtn" disabled class="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-md flex items-center justify-center gap-2">
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                    ></path>
+                                </svg>
+                                Download PNG
+                            </button>
+                            <button id="clearBtn" class="sm:w-auto bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-semibold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2">
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                    ></path>
+                                </svg>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Preview Section -->
+                <div class="bg-gradient-to-br from-slate-50 to-slate-100 border-t border-slate-200 p-6 sm:p-8 lg:p-10">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <svg
+                            class="w-5 h-5 text-blue-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            ></path>
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            ></path>
+                        </svg>
+                        Preview
+                    </h3>
+                    <div class="flex flex-col items-center">
+                        <div id="qrHolder" class="hidden"></div>
+                        <div class="relative inline-block">
+                            <canvas
+                                id="finalCanvas"
+                                width="520"
+                                height="520"
+                                class="max-w-full h-auto rounded-2xl shadow-2xl border-4 border-white"
+                            ></canvas>
+                            <div class="absolute -bottom-3 -right-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                QR Code
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <div id="notes" class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md text-sm text-slate-600 font-medium">
+                                <svg
+                                    class="w-4 h-4 text-slate-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                                No QR code generated yet
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Info -->
+            <div class="mt-8 text-center">
+                <p class="text-sm text-slate-600">
+                    <span class="inline-flex items-center gap-1.5 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        High error correction enabled for reliable scanning
+                    </span>
+                </p>
+            </div>
+        </div>
+        <!-- QRCode.js from CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+        <script>
+        const urlInput = document.getElementById('url');
+        const logoInput = document.getElementById('logo');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const qrHolder = document.getElementById('qrHolder');
+        const finalCanvas = document.getElementById('finalCanvas');
+        const notes = document.getElementById('notes');
+        const sizeInput = document.getElementById('size');
+
+        function clearHolder() {
+            qrHolder.innerHTML = '';
+            const ctx = finalCanvas.getContext('2d');
+            ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
+            notes.innerHTML = `
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Cleared successfully
+            `;
+            downloadBtn.disabled = true;
+        }
+
+        clearBtn.addEventListener('click', () => {
+            clearHolder();
+        });
+
+        generateBtn.addEventListener('click', async () => {
+            const text = (urlInput.value || '').trim();
+            if (!text) { 
+                alert('⚠️ Please enter a URL');
+                return;
+            }
+
+            let size = parseInt(sizeInput.value) || 520;
+            if (size < 128) size = 128;
+            if (size > 2000) size = 2000;
+            finalCanvas.width = finalCanvas.height = size;
+
+            notes.innerHTML = `
+                <svg class="w-4 h-4 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Generating QR code...
+            `;
+
+            qrHolder.innerHTML = '';
+
+            const tempDiv = document.createElement('div');
+            qrHolder.appendChild(tempDiv);
+            const qr = new QRCode(tempDiv, {
+                text: text,
+                width: size,
+                height: size,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            await new Promise(r => setTimeout(r, 60));
+
+            let qrImg = tempDiv.querySelector('img');
+            let qrCanvasElement = tempDiv.querySelector('canvas');
+
+            const ctx = finalCanvas.getContext('2d');
+            ctx.clearRect(0, 0, size, size);
+
+            if (qrImg) {
+                await new Promise((resolve, reject) => {
+                    if (qrImg.complete) resolve();
+                    else qrImg.onload = resolve;
+                    qrImg.onerror = reject;
+                });
+                ctx.drawImage(qrImg, 0, 0, size, size);
+            } else if (qrCanvasElement) {
+                ctx.drawImage(qrCanvasElement, 0, 0, size, size);
+            } else {
+                alert('❌ Failed to generate QR. Try again.');
+                return;
+            }
+
+            const file = logoInput.files[0];
+            if (file) {
+                const img = new Image();
+                img.src = await fileToDataURL(file);
+
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+
+                const logoScale = 0.20;
+                const logoMaxW = Math.floor(size * logoScale);
+                const logoMaxH = Math.floor(size * logoScale);
+
+                let lw = img.width, lh = img.height;
+                const ratio = Math.min(logoMaxW / lw, logoMaxH / lh, 1);
+                lw = Math.round(lw * ratio);
+                lh = Math.round(lh * ratio);
+
+                const cx = Math.round((size - lw) / 2);
+                const cy = Math.round((size - lh) / 2);
+
+                const pad = Math.round(Math.max(8, lw * 0.12));
+                const bgX = cx - pad;
+                const bgY = cy - pad;
+                const bgW = lw + pad * 2;
+                const bgH = lh + pad * 2;
+                const radius = Math.round(Math.min(20, bgW * 0.08));
+
+                ctx.fillStyle = '#fff';
+                roundRect(ctx, bgX, bgY, bgW, bgH, radius, true, false);
+
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#ddd';
+                roundRect(ctx, bgX, bgY, bgW, bgH, radius, false, true);
+
+                ctx.drawImage(img, cx, cy, lw, lh);
+            }
+
+            notes.innerHTML = `
+                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                QR generated (${size}×${size}) ${file ? '• Logo applied' : '• No logo'}
+            `;
+            downloadBtn.disabled = false;
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'qr-code-with-logo.png';
+            link.href = finalCanvas.toDataURL('image/png');
+            link.click();
+        });
+
+        function fileToDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const fr = new FileReader();
+                fr.onload = () => resolve(fr.result);
+                fr.onerror = reject;
+                fr.readAsDataURL(file);
+            });
+        }
+
+        function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+            if (typeof r === 'undefined') r = 5;
+            if (typeof r === 'number') r = { tl: r, tr: r, br: r, bl: r };
+            else {
+                const defaultR = { tl: 0, tr: 0, br: 0, bl: 0 };
+                for (let k in defaultR) r[k] = r[k] || defaultR[k];
+            }
+            ctx.beginPath();
+            ctx.moveTo(x + r.tl, y);
+            ctx.lineTo(x + w - r.tr, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+            ctx.lineTo(x + w, y + h - r.br);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+            ctx.lineTo(x + r.bl, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+            ctx.lineTo(x, y + r.tl);
+            ctx.quadraticCurveTo(x, y, x + r.tl, y);
+            ctx.closePath();
+            if (fill) ctx.fill();
+            if (stroke) ctx.stroke();
+        }
+        </script>
+    </body>
+</html>
